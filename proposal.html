@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>للروان ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a0a2e 50%, #0d0d0d 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ring-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+        }
+
+        .ring {
+            width: 150px;
+            height: 150px;
+            border: 8px solid #ffd700;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5), inset 0 0 30px rgba(255, 215, 0, 0.2);
+            animation: ringGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes ringGlow {
+            from { box-shadow: 0 0 50px rgba(255, 215, 0, 0.5), inset 0 0 30px rgba(255, 215, 0, 0.2); }
+            to { box-shadow: 0 0 80px rgba(255, 215, 0, 0.8), inset 0 0 50px rgba(255, 215, 0, 0.4); }
+        }
+
+        .diamond {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 35px solid #e0e0e0;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+        }
+
+        .diamond::after {
+            content: '';
+            position: absolute;
+            top: 35px;
+            left: -20px;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 15px solid #c0c0c0;
+        }
+
+        .proposal-text {
+            font-size: 1.8rem;
+            color: #fff;
+            text-align: center;
+            line-height: 2;
+            max-width: 500px;
+            padding: 0 20px;
+            margin-bottom: 40px;
+        }
+
+        .proposal-text .name {
+            color: #ff69b4;
+            font-weight: 800;
+            font-size: 2.2rem;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            min-height: 80px;
+        }
+
+        .yes-btn {
+            padding: 15px 50px;
+            font-size: 1.5rem;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 800;
+            color: #fff;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+            transition: all 0.3s ease;
+            animation: pulseBtn 2s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulseBtn {
+            0%, 100% { box-shadow: 0 0 30px rgba(255, 105, 180, 0.5); transform: scale(1); }
+            50% { box-shadow: 0 0 50px rgba(255, 105, 180, 0.8); transform: scale(1.05); }
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 60px rgba(255, 105, 180, 0.9);
+        }
+
+        .no-btn {
+            padding: 15px 50px;
+            font-size: 1.5rem;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 800;
+            color: #fff;
+            background: linear-gradient(135deg, #666, #999);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .no-message {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 105, 180, 0.95);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            white-space: nowrap;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 100;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+        }
+
+        .no-message.show {
+            opacity: 1;
+            animation: messagePop 0.5s ease;
+        }
+
+        @keyframes messagePop {
+            0% { transform: translateX(-50%) scale(0.5); }
+            50% { transform: translateX(-50%) scale(1.2); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        .celebration {
+            display: none;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .celebration.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .celebration-heart {
+            font-size: 8rem;
+            animation: finalHeartBeat 1.5s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes finalHeartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+        }
+
+        .celebration-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
+        }
+
+        .celebration-text {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 2;
+        }
+
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: firework 2s ease-out forwards;
+        }
+
+        @keyframes firework {
+            0% { transform: translate(0, 0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)); opacity: 0; }
+        }
+
+        .main-content {
+            transition: opacity 0.5s ease;
+        }
+
+        .main-content.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            .proposal-text { font-size: 1.4rem; }
+            .proposal-text .name { font-size: 1.8rem; }
+            .yes-btn, .no-btn { font-size: 1.2rem; padding: 12px 35px; }
+            .celebration-title { font-size: 2.5rem; }
+            .celebration-heart { font-size: 6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content" id="mainContent">
+        <div class="ring-container">
+            <div class="ring">
+                <div class="diamond"></div>
+            </div>
+        </div>
+
+        <div class="proposal-text">
+            <span class="name">روان...</span><br><br>
+            أنا عايزكِ تبقي معايا<br>
+            لآخر يوم في حياتي.<br><br>
+            <span style="font-size: 2.2rem; color: #ff69b4; font-weight: 900;">
+                تقبلي تتجوزيني مقدماً؟ 💍
+            </span>
+        </div>
+
+        <div class="buttons-container" id="buttonsContainer">
+            <button class="yes-btn" onclick="showYes()">موافقة ❤️</button>
+            <button class="no-btn" id="noBtn" onclick="handleNoClick()">مش موافقة 😢</button>
+        </div>
+    </div>
+
+    <div class="celebration" id="celebration">
+        <div class="celebration-heart">🎉</div>
+        <h1 class="celebration-title">أخيراً! ❤️</h1>
+        <div class="celebration-text">
+            <p>
+                أنا كنت عارف إنكِ هتوافقي! 😍<br>
+                أنا <strong style="color: #ff69b4;">أحبكِ</strong> يا روان!<br><br>
+                <span style="font-size: 1.2rem;">
+                    💕 هنبقى مع بعض للأبد 💕<br>
+                    🏠 2028 هنبني بيتنا 🏠<br>
+                    👶 وهنكبر عيلتنا 👶
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <div class="no-message" id="noMessage"></div>
+    <div class="fireworks" id="fireworks"></div>
+
+    <script>
+        let noClickCount = 0;
+        let noBtnPosition = { x: 0, y: 0 };
+
+        const noMessages = [
+            "عيب! 😤",
+            "علشان خاطري 🥺",
+            "مش هخليك تطبخي أنا اللي هطبخ! 👨‍🍳",
+            "مش هنجيب عيال يا ستي في أول سنة أو سنتين أو تلاتة براحتك! 👶",
+            "طب يا روان واللي في بطنك 🤰",
+            "روان خلاص علشان حموكشة حبيبك 😭",
+            "خلاص بقى وافقي! 😭",
+            "أنا هعيط! 😢",
+            "رواااان! 💔",
+            "مش هسيبك تروحي! 😤"
+        ];
+
+        function handleNoClick() {
+            const noBtn = document.getElementById('noBtn');
+            const message = document.getElementById('noMessage');
+            const container = document.getElementById('buttonsContainer');
+
+            // Show message
+            message.textContent = noMessages[Math.min(noClickCount, noMessages.length - 1)];
+            message.classList.add('show');
+
+            // Move button randomly around the page (but keep it visible)
+            const maxX = window.innerWidth - 200;
+            const maxY = window.innerHeight - 100;
+
+            noBtnPosition.x = (Math.random() - 0.5) * maxX * 0.8;
+            noBtnPosition.y = (Math.random() - 0.5) * maxY * 0.6;
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = '50%';
+            noBtn.style.top = '50%';
+            noBtn.style.transform = `translate(calc(-50% + ${noBtnPosition.x}px), calc(-50% + ${noBtnPosition.y}px))`;
+            noBtn.style.zIndex = '100';
+
+            noClickCount++;
+
+            // Hide message after 2 seconds
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 2000);
+        }
+
+        function showYes() {
+            const mainContent = document.getElementById('mainContent');
+            const celebration = document.getElementById('celebration');
+
+            mainContent.classList.add('hidden');
+
+            setTimeout(() => {
+                celebration.classList.add('active');
+                startFireworks();
+            }, 500);
+        }
+
+        function startFireworks() {
+            const container = document.getElementById('fireworks');
+            container.innerHTML = '';
+
+            function createFirework() {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight * 0.5;
+                const colors = ['#ff69b4', '#ffd700', '#ff1493', '#ff6347', '#ff4500', '#da70d6'];
+
+                for (let i = 0; i < 20; i++) {
+                    const fw = document.createElement('div');
+                    fw.className = 'firework';
+                    fw.style.left = x + 'px';
+                    fw.style.top = y + 'px';
+                    fw.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    fw.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+                    fw.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
+                    container.appendChild(fw);
+
+                    setTimeout(() => fw.remove(), 2000);
+                }
+            }
+
+            const fwInterval = setInterval(createFirework, 800);
+            setTimeout(() => clearInterval(fwInterval), 10000);
+        }
+    </script>
+</body>
+</html>
